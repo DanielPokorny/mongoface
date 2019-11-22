@@ -1,12 +1,25 @@
 package mas.mongoface;
 
+import com.google.gson.Gson;
+import com.google.gson.stream.JsonReader;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.HandlerCollection;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 
+import java.io.FileReader;
+
 public class Mongoface {
+    public static MongoFaceConfig config;
+
     public static void main(String[] args) throws Exception {
-        Server server = new Server(8000);
+        String iniFile = args[0];
+
+        Gson gson = new Gson();
+        JsonReader reader = new JsonReader(new FileReader(iniFile));
+        config = gson.fromJson(reader, MongoFaceConfig.class);
+
+
+        Server server = new Server(config.port);
         ServletContextHandler wsHandler = new ServletContextHandler(ServletContextHandler.SESSIONS);
         wsHandler.setContextPath("/");
         wsHandler.addServlet(WsQueryHandler.class, "/query");
