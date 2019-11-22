@@ -8,4 +8,9 @@ public class WsQueryAdapter extends WebSocketAdapter {
     public void onWebSocketConnect(Session sess) {
         System.out.println(sess.getRemote());
     }
+
+    @Override
+    public void onWebSocketText(String message) {
+        System.out.println(message);
+    }
 }
