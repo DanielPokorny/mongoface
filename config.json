@@ -2,5 +2,6 @@
   "port": 8000,
   "mongoURL" : "mongodb://127.0.0.1:27017",
   "mongoPort" : 27017,
+  "mongoDB" : "MasCLI",
   "mongoCollection" : "RSSReader"
 }
